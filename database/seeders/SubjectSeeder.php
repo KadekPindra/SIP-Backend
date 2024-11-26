@@ -56,7 +56,7 @@ class SubjectSeeder extends Seeder
         Subject::create([
             'id' => 9,
             'name' => 'Bahasa Inggris',
-            'description' => 'Pelajaran Bahasa Bali'
+            'description' => 'Pelajaran Bahasa Inggris'
         ]);
         Subject::create([
             'id' => 10,

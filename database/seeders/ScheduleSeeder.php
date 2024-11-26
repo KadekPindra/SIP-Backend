@@ -8,35 +8,215 @@ use App\Models\Subject;
 use App\Models\Teacher;
 use App\Models\Room;
 use Illuminate\Database\Seeder;
+use Number;
 
 class ScheduleSeeder extends Seeder
 {
     public function run()
     {
-        $classrooms = Classroom::all();
-        $subjects = Subject::all();
-        $teachers = Teacher::all();
+        $schedules = [
+            // senin
+            [
+                'classroom_id' => 3,
+                'subject_id' => 1,
+                'teacher_id' => 1,
+                'room' => '306',
+                'day' => 'Monday',
+                'start_time' => '07:30:00',
+                'end_time' => '10:10:00',
+            ],
+            [
+                'classroom_id' => 3,
+                'subject_id' => 1,
+                'teacher_id' => 1,
+                'room' => '306',
+                'day' => 'Monday',
+                'start_time' => '10:30:00',
+                'end_time' => '13:10:00',
+            ],
+            [
+                'classroom_id' => 3,
+                'subject_id' => 2,
+                'teacher_id' => 2,
+                'room' => '306',
+                'day' => 'Monday',
+                'start_time' => '13:30:00',
+                'end_time' => '14:10:00',
+            ],
+            [
+                'classroom_id' => 3,
+                'subject_id' => 3,
+                'teacher_id' => 10,
+                'room' => '306',
+                'day' => 'Monday',
+                'start_time' => '14:10:00',
+                'end_time' => '15:30:00',
+            ],
 
-        $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+            // selasa
+            [
+                'classroom_id' => 3,
+                'subject_id' => 4,
+                'teacher_id' => 3,
+                'room' => '304',
+                'day' => 'Tuesday',
+                'start_time' => '07:30:00',
+                'end_time' => '09:30:00',
+            ],
+            [
+                'classroom_id' => 3,
+                'subject_id' => 2,
+                'teacher_id' => 2,
+                'room' => '304',
+                'day' => 'Tuesday',
+                'start_time' => '09:30:00',
+                'end_time' => '10:10:00',
+            ],
+            [
+                'classroom_id' => 3,
+                'subject_id' => 2,
+                'teacher_id' => 2,
+                'room' => '304',
+                'day' => 'Tuesday',
+                'start_time' => '10:30:00',
+                'end_time' => '11:50:00',
+            ],
+            [
+                'classroom_id' => 3,
+                'subject_id' => 5,
+                'teacher_id' => 11,
+                'room' => '304',
+                'day' => 'Tuesday',
+                'start_time' => '11:50:00',
+                'end_time' => '13:10:00',
+            ],
+            [
+                'classroom_id' => 3,
+                'subject_id' => 5,
+                'teacher_id' => 11,
+                'room' => '304',
+                'day' => 'Tuesday',
+                'start_time' => '13:30:00',
+                'end_time' => '15:30:00',
+            ],
 
-        foreach ($classrooms as $classroom) {
-            foreach ($days as $day) {
-                $subject = $subjects->random();
-                $teacher = $teachers->random();
+            // rabu
+            [
+                'classroom_id' => 3,
+                'subject_id' => 6,
+                'teacher_id' => 3,
+                'room' => '305',
+                'day' => 'Wednesday',
+                'start_time' => '07:30:00',
+                'end_time' => '10:10:00',
+            ],
+            [
+                'classroom_id' => 3,
+                'subject_id' => 7,
+                'teacher_id' => 4,
+                'room' => '305',
+                'day' => 'Wednesday',
+                'start_time' => '10:30:00',
+                'end_time' => '12:30:00',
+            ],
+            [
+                'classroom_id' => 3,
+                'subject_id' => 8,
+                'teacher_id' => 5,
+                'room' => '305',
+                'day' => 'Wednesday',
+                'start_time' => '12:30:00',
+                'end_time' => '13:10:00',
+            ],
+            [
+                'classroom_id' => 3,
+                'subject_id' => 8,
+                'teacher_id' => 5,
+                'room' => '305',
+                'day' => 'Wednesday',
+                'start_time' => '13:30:00',
+                'end_time' => '14:10:00',
+            ],
+            [
+                'classroom_id' => 3,
+                'subject_id' => 9,
+                'teacher_id' => 6,
+                'room' => '305',
+                'day' => 'Wednesday',
+                'start_time' => '14:10:00',
+                'end_time' => '15:30:00',
+            ],
 
-                $timeStart = now()->setTime(rand(7, 12), 0); // Rentang waktu antara jam 7:00 - 11:00
-                $timeEnd = $timeStart->copy()->addHours(2);  // Tambah durasi 2 jam
+            // kamis
+            [
+                'classroom_id' => 3,
+                'subject_id' => 10,
+                'teacher_id' => 7,
+                'room' => '307',
+                'day' => 'Thursday',
+                'start_time' => '07:30:00',
+                'end_time' => '10:10:00',
+            ],
+            [
+                'classroom_id' => 3,
+                'subject_id' => 10,
+                'teacher_id' => 7,
+                'room' => '307',
+                'day' => 'Thursday',
+                'start_time' => '10:30:00',
+                'end_time' => '13:10:00',
+            ],
+            [
+                'classroom_id' => 3,
+                'subject_id' => 9,
+                'teacher_id' => 6,
+                'room' => '307',
+                'day' => 'Thursday',
+                'start_time' => '13:30:00',
+                'end_time' => '14:50:00',
+            ],
 
-                // Buat jadwal
-                Schedule::create([
-                    'classroom_id' => $classroom->id,
-                    'subject_id' => $subject->id,
-                    'teacher_id' => $teacher->id,
-                    'day' => $day,
-                    'start_time' => $timeStart->format('H:i'),
-                    'end_time' => $timeEnd->format('H:i'),
-                ]);
-            }
+            // jumat
+            [
+                'classroom_id' => 3,
+                'subject_id' => 12,
+                'teacher_id' => 9,
+                'room' => 'LAB RPL 3',
+                'day' => 'Friday',
+                'start_time' => '07:30:00',
+                'end_time' => '10:10:00',
+            ],
+            [
+                'classroom_id' => 3,
+                'subject_id' => 12,
+                'teacher_id' => 9,
+                'room' => 'LAB RPL 3',
+                'day' => 'Friday',
+                'start_time' => '10:30:00',
+                'end_time' => '11:10:00',
+            ],
+            [
+                'classroom_id' => 3,
+                'subject_id' => 11,
+                'teacher_id' => 8,
+                'room' => 'LAB RPL 3',
+                'day' => 'Friday',
+                'start_time' => '11:10:00',
+                'end_time' => '12:30:00',
+            ],
+        ];
+
+        foreach ($schedules as $schedule) {
+            // Buat jadwal
+            Schedule::create([
+                'classroom_id' => $schedule['classroom_id'],
+                'subject_id' => $schedule['subject_id'],
+                'room' => $schedule['room'],
+                'teacher_id' => $schedule['teacher_id'],
+                'day' => $schedule['day'],
+                'start_time' => $schedule['start_time'],
+                'end_time' => $schedule['end_time'],
+            ]);
         }
     }
 }
