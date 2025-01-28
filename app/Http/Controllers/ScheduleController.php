@@ -10,7 +10,7 @@ class ScheduleController extends Controller
     // Get all schedules with related data
     public function index()
     {
-        $schedules = Schedule::with(['classroom', 'subject'])->get(); // Eager loading relasi
+        $schedules = Schedule::with(['classroom', 'subject', 'teacher'])->get(); // Eager loading relasi
         return response()->json($schedules, 200);
     }
 
@@ -20,19 +20,20 @@ class ScheduleController extends Controller
         $validated = $request->validate([
             'classroom_id' => 'required|exists:classrooms,id',
             'subject_id' => 'required|exists:subjects,id',
+            'teacher_id' => 'required|exists:teachers,id',
             'day' => 'required|string|max:20',
             'time_start' => 'required|date_format:H:i',
             'time_end' => 'required|date_format:H:i|after:time_start',
         ]);
 
         $schedule = Schedule::create($validated);
-        return response()->json($schedule->load(['classroom', 'subject']), 201); // Load relasi setelah penyimpanan
+        return response()->json($schedule->load(['classroom', 'subject', 'teacher']), 201); // Load relasi setelah penyimpanan
     }
 
     // Show a single schedule with related data
     public function show($id)
     {
-        $schedule = Schedule::with(['classroom', 'subject'])->find($id); // Eager loading relasi
+        $schedule = Schedule::with(['classroom', 'subject', 'teacher'])->find($id); // Eager loading relasi
 
         if (!$schedule) {
             return response()->json(['message' => 'Schedule not found'], 404);
@@ -53,13 +54,14 @@ class ScheduleController extends Controller
         $validated = $request->validate([
             'classroom_id' => 'required|exists:classrooms,id',
             'subject_id' => 'required|exists:subjects,id',
+            'teacher_id' => 'required|exists:teachers,id',
             'day' => 'required|string|max:20',
             'time_start' => 'required|date_format:H:i',
             'time_end' => 'required|date_format:H:i|after:time_start',
         ]);
 
         $schedule->update($validated);
-        return response()->json($schedule->load(['classroom', 'subject']), 200); // Load relasi setelah update
+        return response()->json($schedule->load(['classroom', 'subject', 'teacher']), 200); // Load relasi setelah update
     }
 
     // Delete a schedule
