@@ -68,10 +68,5 @@ class SubjectSeeder extends Seeder
             'name' => 'Pendidikan Pancasila dan Kewarganegaraan',
             'description' => 'Pelajaran Pendidikan Pancasila dan Kewarganegaraan'
         ]);
-        Subject::create([
-            'id' => 12,
-            'name' => 'Prakarya dan Kewirausahaan',
-            'description' => 'Pelajaran Prakarya dan Kewirausahaan'
-        ]);
     }
 }
