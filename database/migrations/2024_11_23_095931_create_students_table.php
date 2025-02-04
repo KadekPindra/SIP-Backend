@@ -15,6 +15,9 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('classroom_id')->constrained()->onDelete('cascade');
             $table->integer('attendance_number');
+            $table->string('phone_number')->nullable();
+            $table->text('description')->nullable();
+            $table->string('profile_picture')->nullable();
             $table->timestamps();
         });
     }
