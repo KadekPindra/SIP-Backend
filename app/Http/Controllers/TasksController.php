@@ -10,7 +10,7 @@ class TasksController extends Controller
 
     public function index()
     {
-        $tasks = Tasks::with('student')->get();
+        $tasks = Tasks::with(['student', 'subject'])->get();
         return response()->json($tasks);
     }
     public function store(Request $request)
@@ -36,6 +36,17 @@ class TasksController extends Controller
             'message' => 'Task created successfully',
             'task' => $task->load('subject'),
         ]);
+    }
+
+    public function show ($id)
+    {
+        $task = Tasks::with(['student', 'subject'])->find($id);
+
+        if (!$task) {
+            return response()->json(['message' => 'Task not found'], 404);
+        }
+
+        return response()->json($task, 200);
     }
 
     public function update(Request $request, Tasks $task)
