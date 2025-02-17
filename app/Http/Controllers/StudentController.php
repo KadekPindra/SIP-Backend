@@ -67,6 +67,8 @@ class StudentController extends Controller
         $student->name = $request->name;
         $student->nis = $request->nis;
         $student->classroom_id = $request->classroom_id;
+        $student->phone_number = $request->phone_number;
+        $student->description = $request->description;
         $student->save();
 
         return response()->json(['message' => 'Student updated successfully', 'student' => $student], 200);

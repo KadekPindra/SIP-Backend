@@ -13,8 +13,20 @@ class ClassroomSeeder extends Seeder
      */
     public function run()
     {
-        Classroom::create(['name' => 'XII RPL 1', 'description' => 'Kelas 12 Rekayasa Perangkat Lunak 1']);
-        Classroom::create(['name' => 'XII RPL 2', 'description' => 'Kelas 12 Rekayasa Perangkat Lunak 2']);
-        Classroom::create(['name' => 'XII RPL 3', 'description' => 'Kelas 12 Rekayasa Perangkat Lunak 3']);
+        Classroom::create([
+            'id' => 1,
+            'name' => 'XII RPL 1', 
+            'description' => 'Kelas 12 Rekayasa Perangkat Lunak 1'
+        ]);
+        Classroom::create([
+            'id' => 2,
+            'name' => 'XII RPL 2', 
+            'description' => 'Kelas 12 Rekayasa Perangkat Lunak 2'
+        ]);
+        Classroom::create([
+            'id' => 3,
+            'name' => 'XII RPL 3', 
+            'description' => 'Kelas 12 Rekayasa Perangkat Lunak 3'
+        ]);
     }
 }

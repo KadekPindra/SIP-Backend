@@ -56,7 +56,7 @@ class SubjectSeeder extends Seeder
         Subject::create([
             'id' => 9,
             'name' => 'Bahasa Inggris',
-            'description' => 'Pelajaran Bahasa Bali'
+            'description' => 'Pelajaran Bahasa Inggris'
         ]);
         Subject::create([
             'id' => 10,
@@ -67,11 +67,6 @@ class SubjectSeeder extends Seeder
             'id' => 11,
             'name' => 'Pendidikan Pancasila dan Kewarganegaraan',
             'description' => 'Pelajaran Pendidikan Pancasila dan Kewarganegaraan'
-        ]);
-        Subject::create([
-            'id' => 12,
-            'name' => 'Prakarya dan Kewirausahaan',
-            'description' => 'Pelajaran Prakarya dan Kewirausahaan'
         ]);
     }
 }
