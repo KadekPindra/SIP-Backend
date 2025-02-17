@@ -9,7 +9,8 @@ class TeacherController extends Controller
 {
     public function index()
     {
-        return response()->json(Teacher::all(), 200);
+        $teachers = Teacher::with(['subject', 'user'])->get();
+        return response()->json($teachers, 200);
     }
 
     public function store(Request $request)

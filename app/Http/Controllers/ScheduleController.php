@@ -7,11 +7,14 @@ use Illuminate\Http\Request;
 
 class ScheduleController extends Controller
 {
+    // Get all schedules with related data
     public function index()
     {
-        return response()->json(Schedule::all(), 200);
+        $schedules = Schedule::with(['classroom', 'subject', 'teacher'])->get(); // Eager loading relasi
+        return response()->json($schedules, 200);
     }
 
+    // Store a new schedule
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -24,12 +27,13 @@ class ScheduleController extends Controller
         ]);
 
         $schedule = Schedule::create($validated);
-        return response()->json($schedule, 201);
+        return response()->json($schedule->load(['classroom', 'subject', 'teacher']), 201); // Load relasi setelah penyimpanan
     }
 
+    // Show a single schedule with related data
     public function show($id)
     {
-        $schedule = Schedule::find($id);
+        $schedule = Schedule::with(['classroom', 'subject', 'teacher'])->find($id); // Eager loading relasi
 
         if (!$schedule) {
             return response()->json(['message' => 'Schedule not found'], 404);
@@ -38,6 +42,7 @@ class ScheduleController extends Controller
         return response()->json($schedule, 200);
     }
 
+    // Update a schedule
     public function update(Request $request, $id)
     {
         $schedule = Schedule::find($id);
@@ -56,9 +61,10 @@ class ScheduleController extends Controller
         ]);
 
         $schedule->update($validated);
-        return response()->json($schedule, 200);
+        return response()->json($schedule->load(['classroom', 'subject', 'teacher']), 200); // Load relasi setelah update
     }
 
+    // Delete a schedule
     public function destroy($id)
     {
         $schedule = Schedule::find($id);

@@ -40,7 +40,7 @@ class TasksController extends Controller
 
     public function show ($id)
     {
-        $task = Tasks::with(['student', 'subject'])->find($id);
+        $task = Tasks::with(['student', 'subject', 'subject.teacher'])->find($id);
 
         if (!$task) {
             return response()->json(['message' => 'Task not found'], 404);
